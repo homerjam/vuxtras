@@ -1,0 +1,41 @@
+{
+  "name": "vextras",
+  "version": "0.0.1",
+  "description": "A collection of Nuxt compatible Vue components and plugins",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/homerjam/vextras.git"
+  },
+  "keywords": [
+    "vue",
+    "nuxt",
+    "plugins",
+    "flickity",
+    "isotope",
+    "intersect"
+  ],
+  "author": "homerjam <jameshomer85@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/homerjam/vextras/issues"
+  },
+  "homepage": "https://github.com/homerjam/vextras#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-html": "^4.0.3",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-vue": "^4.5.0"
+  },
+  "dependencies": {
+    "flickity": "^2.1.1",
+    "intersection-observer": "^0.5.0",
+    "isotope-layout": "^3.0.6",
+    "isotope-packery": "^2.0.1"
+  }
+}
