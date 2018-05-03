@@ -1,6 +1,6 @@
 {
   "name": "vextras",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A collection of Nuxt compatible Vue components and plugins",
   "main": "index.js",
   "scripts": {
