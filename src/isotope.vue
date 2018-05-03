@@ -1,4 +1,19 @@
 <script>
+/**
+ * vextras/isotope
+ *
+ * Isotope component
+ *
+ * Usage:
+ *
+ * <isotope options="{ layoutMode: 'packery' }" :items="items">
+ *
+ *  <div v-for="item in items" class="box"></div>
+ *
+ * </isotope>
+ *
+ */
+
 let Isotope;
 if (process.browser) {
   // eslint-disable-next-line

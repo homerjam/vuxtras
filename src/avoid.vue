@@ -1,4 +1,19 @@
 <script>
+/**
+ * vextras/avoid
+ *
+ * Translate element in opposition of mouse movement
+ *
+ * Usage:
+ *
+ * <avoid multiplier="2">
+ *
+ *  <img src="image.jpg">
+ *
+ * </avoid>
+ *
+ */
+
 export default {
   name: 'avoid',
   abstract: true,

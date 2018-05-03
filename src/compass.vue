@@ -1,4 +1,19 @@
 <script>
+/**
+ * vextras/compass
+ *
+ * Mouse compass component, adds classes based on mouse position
+ *
+ * Usage:
+ *
+ * <compass east="0.3" west="0.3">
+ *
+ *  <img src="image.jpg">
+ *
+ * </compass>
+ *
+ */
+
 export default {
   props: {
     north: {

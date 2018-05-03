@@ -1,4 +1,19 @@
 <script>
+/**
+ * vextras/intersect
+ *
+ * Intersection component
+ *
+ * Usage:
+ *
+ * <intersect threshold="[0]" root-margin="100px 0 100px 0" @enter="showImage()">
+ *
+ *  <img src="image.jpg">
+ *
+ * </isotope>
+ *
+ */
+
 import Vue from 'vue';
 
 if (process.client) {
@@ -50,9 +65,9 @@ export default {
 
     this.$nextTick(() => {
       if (this.$slots.default && this.$slots.default.length > 1) {
-        warn('[VueIntersect] You may only wrap one element in a <intersect> component.');
+        warn('[vextras/intersect] You may only wrap one element in a <intersect> component.');
       } else if (!this.$slots.default || this.$slots.default.length < 1) {
-        warn('[VueIntersect] You must have one child inside a <intersect> component.');
+        warn('[vextras/intersect] You must have one child inside a <intersect> component.');
         return;
       }
 

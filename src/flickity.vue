@@ -1,4 +1,37 @@
 <script>
+/**
+ * vextras/flickity
+ *
+ * Flickity component
+ *
+ * Usage:
+ *
+ * data() {
+ *  return {
+ *    flickityOptions: {
+ *      prevNextButtons: false,
+ *      autoResize: true,
+ *    }
+ *  }
+ * },
+ * methods: {
+ *  initFlickity(flickity) {
+ *    flickity.on('select', () => {
+ *      console.log('select');
+ *    });
+ *  }
+ * }
+ *
+ * <flickity :options="flickityOptions" @init="initFlickity">
+ *
+ *  <div v-for="item in items" class="slide">
+ *    ...
+ *  </div>
+ *
+ * </flickity>
+ *
+ */
+
 let Flickity;
 if (process.browser) {
   // eslint-disable-next-line

@@ -1,4 +1,15 @@
 <script>
+/**
+ * vextras/responsive-background-image
+ *
+ * Usage:
+ *
+ * <rb-img style="background-size: cover">
+ *  <img src="image.jpg" srcset="image.jpg 500w, image@2x.jpg 1000w">
+ * </rb-img>
+ *
+ */
+
 export default {
   props: {
     opacityEnabled: {
