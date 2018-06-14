@@ -6,7 +6,7 @@
  *
  * Usage:
  *
- * <intersect threshold="[0]" root-margin="100px 0 100px 0" @enter="showImage()">
+ * <intersect :threshold="[0]" root-margin="100px 0px 100px 0px" @enter="showImage()">
  *
  *  <img src="image.jpg">
  *
@@ -35,7 +35,7 @@ export default {
     threshold: {
       type: Array,
       required: false,
-      default: () => [0, 0.2],
+      default: () => [0, 0],
     },
     root: {
       type: typeof HTMLElement !== 'undefined' ? HTMLElement : Object,
