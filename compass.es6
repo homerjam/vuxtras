@@ -1,4 +1,4 @@
-import Compass from './src/compass.vue';
+import Compass from './src/compass';
 
 function plugin(Vue) {
   Vue.component('compass', Compass);

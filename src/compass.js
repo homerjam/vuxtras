@@ -1,4 +1,3 @@
-<script>
 /**
  * vextras/compass
  *
@@ -77,11 +76,13 @@ export default {
       }
     },
   },
+  mounted() {
+    this.$el.addEventListener('mousemove', this.mousemove);
+  },
+  destroyed() {
+    this.$el.removeEventListener('mousemove', this.mousemove);
+  },
+  render() {
+    return this.$slots.default[0];
+  },
 };
-</script>
-
-<template>
-  <div @mousemove="mousemove($event)">
-    <slot/>
-  </div>
-</template>
