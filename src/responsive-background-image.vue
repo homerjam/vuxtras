@@ -32,10 +32,15 @@ export default {
       type: String,
       default: 'rbi-not-loaded',
     },
+    dropShadow: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
       isLoaded: false,
+      src: undefined,
     };
   },
   computed: {
@@ -50,6 +55,17 @@ export default {
         return {};
       }
       return this.isLoaded ? { opacity: 1 } : { opacity: 0 };
+    },
+    dropShadowOptions() {
+      return Object.assign({
+        enabled: false,
+        color: 'black',
+        opacity: 0.5,
+        size: 4,
+        padding: [0.02, 0.02, 0.02, 0.02],
+        offsetX: 0,
+        offsetY: 0,
+      }, this.dropShadow);
     },
   },
   mounted() {
@@ -78,7 +94,10 @@ export default {
 
       if (this.src !== src) {
         this.src = src;
-        this.$el.style.backgroundImage = `url("${this.src}")`;
+
+        if (!this.dropShadowOptions.enabled) {
+          this.$el.style.backgroundImage = `url("${this.src}")`;
+        }
       }
     },
   },
@@ -86,10 +105,35 @@ export default {
 </script>
 
 <template>
-  <div
-    :class="getClass"
-    :style="getStyle"
+<div
+  :class="getClass"
+  :style="getStyle"
+>
+  <svg
+    v-if="dropShadowOptions.enabled"
+    width="100%"
+    height="100%"
   >
-    <slot/>
-  </div>
+    <defs>
+      <filter id="rbi-shadow">
+        <feDropShadow
+          :dx="dropShadowOptions.offsetX"
+          :dy="dropShadowOptions.offsetY"
+          :stdDeviation="dropShadowOptions.size"
+          :flood-color="dropShadowOptions.color"
+          :flood-opacity="dropShadowOptions.opacity"
+        />
+      </filter>
+    </defs>
+    <image
+      :xlink:href="src"
+      :x="(dropShadowOptions.padding[3] * 100) + '%'"
+      :y="(dropShadowOptions.padding[0] * 100) + '%'"
+      :width="100 - (dropShadowOptions.padding[3] * 100) - (dropShadowOptions.padding[1] * 100) + '%'"
+      :height="100 - (dropShadowOptions.padding[0] * 100) - (dropShadowOptions.padding[2] * 100) + '%'"
+      style="filter:url(#rbi-shadow);"
+    />
+  </svg>
+  <slot/>
+</div>
 </template>
