@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style>
-@import '~flickity/dist/flickity.css';
+@import 'flickity/dist/flickity.css';
 </style>
 
 <template>
