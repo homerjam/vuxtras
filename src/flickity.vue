@@ -1,6 +1,6 @@
 <script>
 /**
- * vextras/flickity
+ * vuxtras/flickity
  *
  * Flickity component
  *

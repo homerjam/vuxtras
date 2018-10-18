@@ -1,5 +1,5 @@
 /**
- * vextras/compass
+ * vuxtras/compass
  *
  * Mouse compass component, adds classes based on mouse position
  *

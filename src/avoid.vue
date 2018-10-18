@@ -1,6 +1,6 @@
 <script>
 /**
- * vextras/avoid
+ * vuxtras/avoid
  *
  * Translate element in opposition of mouse movement
  *

@@ -1,4 +1,25 @@
 <script>
+/**
+ * vuxtras/smart-link
+ *
+ * Use absolute or relative urls interchangeably
+ *
+ * Usage:
+ *
+ * <smart-link :to="'http://external.com'">
+ *
+ *  <img src="image.jpg">
+ *
+ * </smart-link>
+ *
+ * <smart-link :to="'/internal'">
+ *
+ *  <img src="image.jpg">
+ *
+ * </smart-link>
+ *
+ */
+
 export default {
   props: {
     to: {

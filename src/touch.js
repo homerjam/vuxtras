@@ -1,5 +1,5 @@
 /**
- * vextras/touch
+ * vuxtras/touch
  *
  * Hammer.js directive
  *

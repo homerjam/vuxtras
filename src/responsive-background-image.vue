@@ -1,6 +1,6 @@
 <script>
 /**
- * vextras/responsive-background-image
+ * vuxtras/responsive-background-image
  *
  * Usage:
  *

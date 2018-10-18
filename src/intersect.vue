@@ -1,6 +1,6 @@
 <script>
 /**
- * vextras/intersect
+ * vuxtras/intersect
  *
  * Intersection component
  *
@@ -65,9 +65,9 @@ export default {
 
     this.$nextTick(() => {
       if (this.$slots.default && this.$slots.default.length > 1) {
-        warn('[vextras/intersect] You may only wrap one element in a <intersect> component.');
+        warn('[vuxtras/intersect] You may only wrap one element in a <intersect> component.');
       } else if (!this.$slots.default || this.$slots.default.length < 1) {
-        warn('[vextras/intersect] You must have one child inside a <intersect> component.');
+        warn('[vuxtras/intersect] You must have one child inside a <intersect> component.');
         return;
       }
 

@@ -1,6 +1,6 @@
 <script>
 /**
- * vextras/isotope
+ * vuxtras/isotope
  *
  * Isotope component
  *
