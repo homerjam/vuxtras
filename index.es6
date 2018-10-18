@@ -4,6 +4,7 @@ import VueFlickity from './flickity.es6';
 import VueIntersect from './intersect.es6';
 import VueIsotope from './isotope.es6';
 import VueResponsiveBackgroundImage from './responsive-background-image.es6';
+import VueSmartLink from './smart-link.es6';
 import VueTouch from './touch.es6';
 
 export {
@@ -13,5 +14,6 @@ export {
   VueIntersect,
   VueIsotope,
   VueResponsiveBackgroundImage,
+  VueSmartLink,
   VueTouch,
 };
