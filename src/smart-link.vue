@@ -24,7 +24,7 @@ export default {
   props: {
     to: {
       type: [String, Object],
-      required: true,
+      default: '',
     },
   },
   data() {
