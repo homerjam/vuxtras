@@ -30,7 +30,8 @@ export default {
   data() {
     const isAbsoluteUrl = typeof this.to === 'string' && /^http/.test(this.to);
     return {
-      is: isAbsoluteUrl ? 'a' : 'router-link',
+      is: !isAbsoluteUrl && this.to ? 'router-link' : this.to ? 'a' : 'span',
+      smartTo: this.to ? this.to : undefined,
       href: isAbsoluteUrl ? this.to : undefined,
       target: isAbsoluteUrl ? '_blank' : undefined,
     };
@@ -41,7 +42,7 @@ export default {
 <template>
   <component
     :is="is"
-    :to="to"
+    :to="smartTo"
     :href="href"
     :target="target"
   >
