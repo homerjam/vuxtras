@@ -30,21 +30,24 @@ export default {
   data() {
     const isAbsoluteUrl = typeof this.to === 'string' && /^http/.test(this.to);
     return {
-      is: !isAbsoluteUrl && this.to ? 'router-link' : this.to ? 'a' : 'span',
-      smartTo: this.to ? this.to : undefined,
-      href: isAbsoluteUrl ? this.to : undefined,
-      target: isAbsoluteUrl ? '_blank' : undefined,
+      isAbsoluteUrl,
     };
   },
 };
 </script>
 
 <template>
+  <router-link
+    v-if="!isAbsoluteUrl && this.to"
+    :to="to"
+  >
+    <slot/>
+  </router-link>
   <component
-    :is="is"
-    :to="smartTo"
-    :href="href"
-    :target="target"
+    v-else
+    :is="this.to ? 'a' : 'span'"
+    :href="isAbsoluteUrl ? this.to : undefined"
+    :target="isAbsoluteUrl ? '_blank' : undefined"
   >
     <slot/>
   </component>
