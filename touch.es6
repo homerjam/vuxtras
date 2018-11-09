@@ -1,4 +1,4 @@
-import Touch from './src/touch';
+import Touch from './src/touch.es6';
 
 function plugin(Vue) {
   Vue.directive('touch', Touch);
