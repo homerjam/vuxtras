@@ -1,4 +1,25 @@
 <script>
+/**
+ * vuxtras/morph
+ *
+ * Morph component
+ *
+ * Usage:
+ *
+ * <morph :watch="booleanProp">
+ *
+ *  <svg>
+ *    <!-- default state -->
+ *  </svg>
+ *
+ *  <svg>
+ *    <!-- active state -->
+ *  </svg>
+ *
+ * </morph>
+ *
+ */
+
 import { Tween, Easing, autoPlay } from 'es6-tween';
 import { interpolate } from 'polymorph-js';
 import { reverse } from 'svg-path-reverse';
