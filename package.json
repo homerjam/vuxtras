@@ -33,10 +33,13 @@
     "eslint-plugin-vue": "^4.7.1"
   },
   "dependencies": {
+    "es6-tween": "^5.3.1",
     "flickity": "^2.1.2",
     "hammerjs": "^2.0.8",
-    "intersection-observer": "^0.5.0",
+    "intersection-observer": "^0.5.1",
     "isotope-layout": "^3.0.6",
-    "isotope-packery": "^2.0.1"
+    "isotope-packery": "^2.0.1",
+    "polymorph-js": "^0.2.4",
+    "svg-path-reverse": "^1.1.0"
   }
 }
