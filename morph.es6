@@ -1,4 +1,4 @@
-import Morph from './src/morph.es6';
+import Morph from './src/morph.vue';
 
 function plugin(Vue) {
   Vue.directive('morph', Morph);
