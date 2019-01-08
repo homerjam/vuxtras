@@ -1,6 +1,6 @@
 {
   "name": "vuxtras",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "A collection of Nuxt compatible Vue components and plugins",
   "main": "index.js",
   "scripts": {
