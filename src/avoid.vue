@@ -22,20 +22,40 @@ export default {
       type: Number,
       default: 1,
     },
+    parentSelector: {
+      type: String,
+      default: '',
+    },
+    targetSelector: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      parent: null,
+      target: null,
+    };
   },
   methods: {
     mousemove(event) {
-      const x = (event.layerX / this.$el.clientWidth) * this.multiplier;
-      const y = (event.layerY / this.$el.clientHeight) * this.multiplier;
+      const rect = this.parent.getBoundingClientRect();
+      const x = ((((event.clientX - rect.x) / this.parent.clientWidth) - 0.5) * -2) * this.multiplier;
+      const y = ((((event.clientY - rect.y) / this.parent.clientHeight) - 0.5) * -2) * this.multiplier;
 
-      this.$el.style.transform = `translate(-${x}%, -${y}%)`;
+      this.target.style.transform = `translate(${x}%, ${y}%)`;
     },
   },
   mounted() {
-    this.$el.parentNode.addEventListener('mousemove', this.mousemove);
+    this.parent = this.parentSelector ? this.$el.querySelector(this.parentSelector) : this.$el.parentNode;
+    this.target = this.targetSelector ? this.$el.querySelector(this.targetSelector) : this.$el;
+
+    this.parent.addEventListener('mousemove', this.mousemove, false);
   },
   destroyed() {
-    this.$el.parentNode.removeEventListener('mousemove', this.mousemove);
+    if (this.parent) {
+      this.parent.removeEventListener('mousemove', this.mousemove);
+    }
   },
   render() {
     return this.$slots.default ? this.$slots.default[0] : null;
