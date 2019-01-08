@@ -7,7 +7,7 @@
  *
  * <div v-touch:tap="tapMethod"></div>
  *
- * <div v-touch:swiperight="onSwipeRight()"></div>
+ * <div v-touch:swipe.right="onSwipeRight()"></div>
  */
 
 let Hammer;

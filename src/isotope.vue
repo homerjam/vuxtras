@@ -6,7 +6,7 @@
  *
  * Usage:
  *
- * <isotope options="{ layoutMode: 'packery' }" :items="items">
+ * <isotope :options="{ layoutMode: 'packery' }" :items="items">
  *
  *  <div v-for="item in items" class="box"></div>
  *
