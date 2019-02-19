@@ -111,16 +111,16 @@ export default {
 </script>
 
 <template>
-  <div
+  <span
     :class="{ ready }"
     class="morph">
-    <div class="morph-sources"><slot /></div>
+    <span class="morph-sources"><slot /></span>
     <svg
       :viewBox="targetViewBox"
       class="morph-target">
       <path class="morph-target-path" />
     </svg>
-  </div>
+  </span>
 </template>
 
 <style scoped>
