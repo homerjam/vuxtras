@@ -28,9 +28,11 @@ export default {
     },
   },
   data() {
-    const isAbsoluteUrl = typeof this.to === 'string' && /^http/.test(this.to);
+    const isUri = typeof this.to === 'string' && /^(https?:\/\/|mailto:|tel:)/.test(this.to);
+    const isExternal = isUri && /^(https?:\/\/)/.test(this.to);
     return {
-      isAbsoluteUrl,
+      isUri,
+      isExternal,
     };
   },
 };
@@ -38,7 +40,7 @@ export default {
 
 <template>
   <router-link
-    v-if="!isAbsoluteUrl && this.to"
+    v-if="!isUri && this.to"
     :to="to"
   >
     <slot/>
@@ -46,8 +48,8 @@ export default {
   <component
     v-else
     :is="this.to ? 'a' : 'span'"
-    :href="isAbsoluteUrl ? this.to : undefined"
-    :target="isAbsoluteUrl ? '_blank' : undefined"
+    :href="isUri ? this.to : undefined"
+    :target="isUri && isExternal ? '_blank' : undefined"
   >
     <slot/>
   </component>
