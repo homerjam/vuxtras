@@ -45,7 +45,9 @@ export default {
     el.$hammer.on(gesture.toLowerCase(), binding.value);
   },
   unbind(el) {
-    el.$hammer.destroy();
-    el.$hammer = null;
+    if (el.$hammer) {
+      el.$hammer.destroy();
+      el.$hammer = null;
+    }
   },
 };
