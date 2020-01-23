@@ -16,7 +16,11 @@
     "plugins",
     "flickity",
     "isotope",
-    "intersect"
+    "intersect",
+    "svg",
+    "morph",
+    "touch",
+    "wheel"
   ],
   "author": "homerjam <jameshomer85@gmail.com>",
   "license": "MIT",
