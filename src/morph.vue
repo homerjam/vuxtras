@@ -72,10 +72,11 @@ export default {
     this.$el.style.width = `${sourceSvgs[0].clientWidth}px`;
     this.$el.style.height = `${sourceSvgs[0].clientHeight}px`;
 
-    this.targetViewBox = this.viewBox
-      || sourceSvgs[0].getAttribute('viewBox')
-      || sourceSvgs[0].getAttribute('viewbox')
-      || '0 0 24 24';
+    this.targetViewBox =
+      this.viewBox ||
+      sourceSvgs[0].getAttribute('viewBox') ||
+      sourceSvgs[0].getAttribute('viewbox') ||
+      '0 0 24 24';
 
     this.targetPath = this.$el.querySelector('.morph-target-path');
 
@@ -92,8 +93,8 @@ export default {
 
     this.renderMorph = interpolate(this.sourcePaths, {
       optimize:
-        Math.round(this.sourcePaths[0].getTotalLength())
-        === Math.round(this.sourcePaths[1].getTotalLength())
+        Math.round(this.sourcePaths[0].getTotalLength()) ===
+        Math.round(this.sourcePaths[1].getTotalLength())
           ? 'none'
           : 'fill',
     });
@@ -111,13 +112,11 @@ export default {
 </script>
 
 <template>
-  <span
-    :class="{ ready }"
-    class="morph">
-    <span class="morph-sources"><slot /></span>
-    <svg
-      :viewBox="targetViewBox"
-      class="morph-target">
+  <span class="morph" :class="{ ready }">
+    <span class="morph-sources">
+      <slot />
+    </span>
+    <svg :viewBox="targetViewBox" class="morph-target">
       <path class="morph-target-path" />
     </svg>
   </span>

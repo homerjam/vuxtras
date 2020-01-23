@@ -12,12 +12,12 @@
 
 let Hammer;
 if (typeof window !== 'undefined') {
-  // eslint-disable-next-line
   Hammer = require('hammerjs');
   delete Hammer.defaults.cssProps.userSelect;
 }
 
-const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+const capitalize = str =>
+  str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
 export default {
   bind(el, binding) {
@@ -26,7 +26,9 @@ export default {
     }
 
     const gesture = capitalize(binding.arg);
-    const direction = Object.keys(binding.modifiers).length ? Object.keys(binding.modifiers)[0].toUpperCase() : 'ALL';
+    const direction = Object.keys(binding.modifiers).length
+      ? Object.keys(binding.modifiers)[0].toUpperCase()
+      : 'ALL';
 
     const options = {
       direction: Hammer[`DIRECTION_${direction}`],
@@ -35,11 +37,11 @@ export default {
     try {
       el.$hammer.add(new Hammer[gesture](options));
     } catch (error) {
-      throw new Error('[vue-touch] invalid gesture');
+      throw new Error('[vuxtras/touch] invalid gesture');
     }
 
     if (typeof binding.value !== 'function') {
-      throw new Error('[vue-touch] invalid handler');
+      throw new Error('[vuxtras/touch] invalid handler');
     }
 
     el.$hammer.on(gesture.toLowerCase(), binding.value);

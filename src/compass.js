@@ -37,10 +37,10 @@ export default {
       const rect = this.$el.getBoundingClientRect();
 
       const direction = {
-        north: rect.y + (rect.height * this.north),
-        south: (rect.y + rect.height) - (rect.height * this.south),
-        east: (rect.x + rect.width) - (rect.width * this.east),
-        west: rect.x + (rect.width * this.west),
+        north: rect.y + rect.height * this.north,
+        south: rect.y + rect.height - rect.height * this.south,
+        east: rect.x + rect.width - rect.width * this.east,
+        west: rect.x + rect.width * this.west,
       };
 
       if (event.pageX <= direction.west) {

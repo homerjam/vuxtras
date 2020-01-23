@@ -15,10 +15,8 @@
  */
 
 let Isotope;
-if (process.browser) {
-  // eslint-disable-next-line
+if (typeof window !== 'undefined') {
   Isotope = require('isotope-layout');
-  // eslint-disable-next-line
   require('isotope-packery');
 }
 
@@ -40,6 +38,14 @@ export default {
       },
     },
   },
+  watch: {
+    items() {
+      this.$nextTick(() => {
+        this.isotope.reloadItems();
+        this.isotope.arrange();
+      });
+    },
+  },
   mounted() {
     this.init();
   },
@@ -52,22 +58,13 @@ export default {
       this.$emit('init', this.isotope);
     },
   },
-  watch: {
-    items() {
-      this.$nextTick(() => {
-        this.isotope.reloadItems();
-        this.isotope.arrange();
-      });
-    },
-  },
 };
 </script>
 
-<style>
-</style>
+<style></style>
 
 <template>
-<div>
-  <slot></slot>
-</div>
+  <div>
+    <slot />
+  </div>
 </template>

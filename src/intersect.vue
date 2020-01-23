@@ -16,20 +16,18 @@
 
 import Vue from 'vue';
 
-if (process.client) {
-  // eslint-disable-next-line
+if (typeof window !== 'undefined') {
   require('intersection-observer');
 }
 
-const warn = (msg) => {
+const warn = msg => {
   if (!Vue.config.silent) {
-    // eslint-disable-next-line
     console.warn(msg);
   }
 };
 
 export default {
-  name: 'intersect',
+  name: 'Intersect',
   abstract: true,
   props: {
     threshold: {
@@ -49,25 +47,32 @@ export default {
     },
   },
   mounted() {
-    this.observer = new IntersectionObserver((entries) => {
-      if (!entries[0].isIntersecting) {
-        this.$emit('leave', entries[0]);
-      } else {
-        this.$emit('enter', entries[0]);
-      }
+    this.observer = new IntersectionObserver(
+      entries => {
+        if (!entries[0].isIntersecting) {
+          this.$emit('leave', entries[0]);
+        } else {
+          this.$emit('enter', entries[0]);
+        }
 
-      this.$emit('change', entries[0]);
-    }, {
-      threshold: this.threshold,
-      root: this.root,
-      rootMargin: this.rootMargin,
-    });
+        this.$emit('change', entries[0]);
+      },
+      {
+        threshold: this.threshold,
+        root: this.root,
+        rootMargin: this.rootMargin,
+      }
+    );
 
     this.$nextTick(() => {
       if (this.$slots.default && this.$slots.default.length > 1) {
-        warn('[vuxtras/intersect] You may only wrap one element in a <intersect> component.');
+        warn(
+          '[vuxtras/intersect] You may only wrap one element in a <intersect> component.'
+        );
       } else if (!this.$slots.default || this.$slots.default.length < 1) {
-        warn('[vuxtras/intersect] You must have one child inside a <intersect> component.');
+        warn(
+          '[vuxtras/intersect] You must have one child inside a <intersect> component.'
+        );
         return;
       }
 
