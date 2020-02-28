@@ -37,6 +37,19 @@ export default {
         return [];
       },
     },
+    autoResize: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  data() {
+    return {
+      isotope: null,
+      rafId: null,
+      width: 0,
+      height: 0,
+      viewportHeight: 0,
+    };
   },
   watch: {
     items() {
@@ -49,13 +62,37 @@ export default {
   mounted() {
     this.init();
   },
-  afterDestroy() {
+  destroyed() {
     this.isotope = null;
+
+    if (this.rafId) {
+      window.cancelAnimationFrame(this.rafId);
+    }
   },
   methods: {
     init() {
       this.isotope = new Isotope(this.$el, this.options);
+
       this.$emit('init', this.isotope);
+
+      if (this.autoResize) {
+        this.raf();
+      }
+    },
+    raf() {
+      if (
+        this.width !== this.$el.clientWidth ||
+        this.height !== this.$el.clientHeight ||
+        this.viewportHeight !== window.innerHeight
+      ) {
+        this.width = this.$el.clientWidth;
+        this.height = this.$el.clientHeight;
+        this.viewportHeight = window.innerHeight;
+
+        this.isotope.arrange();
+      }
+
+      this.rafId = window.requestAnimationFrame(this.raf);
     },
   },
 };

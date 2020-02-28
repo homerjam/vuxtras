@@ -10,7 +10,6 @@
  *  return {
  *    flickityOptions: {
  *      prevNextButtons: false,
- *      autoResize: true,
  *    }
  *  }
  * },
@@ -22,7 +21,7 @@
  *  }
  * }
  *
- * <flickity :options="flickityOptions" @init="initFlickity">
+ * <flickity :options="flickityOptions" :autoResize="true" @init="initFlickity">
  *
  *  <div v-for="item in items" class="slide">
  *    ...
@@ -45,14 +44,38 @@ export default {
         return {};
       },
     },
+    initDelay: {
+      type: Number,
+      default: 0,
+    },
+    autoResize: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  data() {
+    return {
+      flickity: null,
+      rafId: null,
+      width: 0,
+      height: 0,
+      viewportHeight: 0,
+    };
   },
   mounted() {
-    if (this.options.initDelay && this.options.initDelay > -1) {
+    if (this.initDelay) {
       setTimeout(() => {
         this.init();
-      }, this.options.initDelay);
+      }, this.initDelay);
     } else {
       this.init();
+    }
+  },
+  destroyed() {
+    this.flickity = null;
+
+    if (this.rafId) {
+      window.cancelAnimationFrame(this.rafId);
     }
   },
   methods: {
@@ -61,17 +84,19 @@ export default {
 
       this.$emit('init', this.flickity);
 
-      if (this.options.autoResize) {
+      if (this.autoResize) {
         this.raf();
       }
     },
     raf() {
       if (
         this.width !== this.$el.clientWidth ||
-        this.height !== this.$el.clientHeight
+        this.height !== this.$el.clientHeight ||
+        this.viewportHeight !== window.innerHeight
       ) {
         this.width = this.$el.clientWidth;
         this.height = this.$el.clientHeight;
+        this.viewportHeight = window.innerHeight;
 
         this.flickity.resize();
       }
@@ -79,18 +104,11 @@ export default {
       this.rafId = window.requestAnimationFrame(this.raf);
     },
   },
-  afterDestroy() {
-    this.flickity = null;
-
-    if (this.rafId) {
-      window.cancelAnimationFrame(this.rafId);
-    }
-  },
 };
 </script>
 
 <style>
-/*! Flickity v2.1.2
+/*! Flickity v2.2.1
 https://flickity.metafizzy.co
 ---------------------------------------------- */
 
@@ -166,7 +184,7 @@ https://flickity.metafizzy.co
 }
 
 .flickity-button-icon {
-  fill: #333;
+  fill: currentColor;
 }
 
 /* ---- previous/next buttons ---- */
