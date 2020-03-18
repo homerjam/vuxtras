@@ -17,7 +17,7 @@ if (typeof window !== 'undefined') {
 export default {
   bind(el, binding) {
     if (!el.$hamster) {
-      el.$hamster = new Hamster(el);
+      el.$hamster = Hamster(el);
     }
 
     if (typeof binding.value !== 'function') {
