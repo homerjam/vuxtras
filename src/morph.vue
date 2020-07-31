@@ -42,11 +42,16 @@ export default {
       type: String,
       default: undefined,
     },
+    preserveAspectRatio: {
+      type: String,
+      default: undefined,
+    },
   },
   data() {
     return {
       ready: false,
       targetViewBox: undefined,
+      targetPreserveAspectRatio: undefined,
       targetPath: null,
       sourcePaths: null,
       renderMorph: null,
@@ -77,6 +82,12 @@ export default {
       sourceSvgs[0].getAttribute('viewBox') ||
       sourceSvgs[0].getAttribute('viewbox') ||
       '0 0 24 24';
+
+    this.targetPreserveAspectRatio =
+      this.preserveAspectRatio ||
+      sourceSvgs[0].getAttribute('preserveAspectRatio') ||
+      sourceSvgs[0].getAttribute('preserveAspectRatio') ||
+      'xMidYMid';
 
     this.targetPath = this.$el.querySelector('.morph-target-path');
 
@@ -116,7 +127,11 @@ export default {
     <span class="morph-sources">
       <slot />
     </span>
-    <svg :viewBox="targetViewBox" class="morph-target">
+    <svg
+      :viewBox="targetViewBox"
+      :preserveAspectRatio="targetPreserveAspectRatio"
+      class="morph-target"
+    >
       <path class="morph-target-path" />
     </svg>
   </span>
