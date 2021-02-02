@@ -29,19 +29,19 @@
   },
   "homepage": "https://github.com/homerjam/vuxtras#readme",
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^6.8.0",
-    "eslint-plugin-vue": "^6.1.2"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.19.0",
+    "eslint-plugin-vue": "^7.5.0"
   },
   "dependencies": {
-    "es6-tween": "^5.5.10",
-    "flickity": "^2.1.2",
+    "es6-tween": "^5.5.11",
+    "flickity": "^2.2.2",
     "hammerjs": "^2.0.8",
     "hamsterjs": "^1.1.3",
-    "intersection-observer": "^0.7.0",
+    "intersection-observer": "^0.12.0",
     "isotope-layout": "^3.0.6",
     "isotope-packery": "^2.0.1",
     "polymorph-js": "^1.0.2",
-    "svg-path-reverse": "^1.1.0"
+    "svg-path-reverse": "^1.2.1"
   }
 }
