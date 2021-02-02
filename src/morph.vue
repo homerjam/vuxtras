@@ -46,6 +46,14 @@ export default {
       type: String,
       default: undefined,
     },
+    width: {
+      type: [Number, String],
+      default: undefined,
+    },
+    height: {
+      type: [Number, String],
+      default: undefined,
+    },
   },
   data() {
     return {
@@ -74,8 +82,11 @@ export default {
 
     const sourceSvgs = this.$el.querySelectorAll('.morph-sources svg');
 
-    this.$el.style.width = `${sourceSvgs[0].clientWidth}px`;
-    this.$el.style.height = `${sourceSvgs[0].clientHeight}px`;
+    const width = this.width || sourceSvgs[0].clientWidth;
+    const height = this.height || sourceSvgs[0].clientHeight;
+
+    this.$el.style.width = typeof width === 'string' ? width : `${width}px`;
+    this.$el.style.height = typeof height === 'string' ? height : `${height}px`;
 
     this.targetViewBox =
       this.viewBox ||
@@ -123,7 +134,7 @@ export default {
 </script>
 
 <template>
-  <span class="morph" :class="{ ready }">
+  <div class="morph" :class="{ ready }">
     <span class="morph-sources">
       <slot />
     </span>
@@ -134,10 +145,10 @@ export default {
     >
       <path class="morph-target-path" />
     </svg>
-  </span>
+  </div>
 </template>
 
-<style scoped>
+<style>
 .morph {
   position: relative;
   display: inline-block;
