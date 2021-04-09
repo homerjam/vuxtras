@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      isIntersecting: false,
+      isIntersecting: null,
     };
   },
   watch: {
@@ -56,6 +56,8 @@ export default {
       this.init();
     },
     isIntersecting() {
+      if (!this.entry) return;
+
       if (this.isIntersecting) {
         this.$emit('enter', this.entry);
       } else {
@@ -69,13 +71,11 @@ export default {
     this.init();
   },
   destroyed() {
-    this.observer.disconnect();
+    this.reset();
   },
   methods: {
     init() {
-      if (this.observer) {
-        this.observer.disconnect();
-      }
+      this.reset();
 
       this.entry = null;
 
@@ -108,6 +108,13 @@ export default {
 
         this.observer.observe(this.$slots.default[0].elm);
       });
+    },
+    reset() {
+      if (this.observer) {
+        this.observer.disconnect();
+      }
+
+      this.isIntersecting = null;
     },
   },
   render() {
