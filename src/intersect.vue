@@ -43,12 +43,26 @@ export default {
       default: '0px',
     },
   },
+  data() {
+    return {
+      isIntersecting: false,
+    };
+  },
   watch: {
     threshold() {
       this.init();
     },
     rootMargin() {
       this.init();
+    },
+    isIntersecting() {
+      if (this.isIntersecting) {
+        this.$emit('enter', this.entry);
+      } else {
+        this.$emit('leave', this.entry);
+      }
+
+      this.$emit('change', this.entry);
     },
   },
   mounted() {
@@ -63,15 +77,15 @@ export default {
         this.observer.disconnect();
       }
 
+      this.entry = null;
+
       this.observer = new IntersectionObserver(
         (entries) => {
-          if (!entries[0].isIntersecting) {
-            this.$emit('leave', entries[0]);
-          } else {
-            this.$emit('enter', entries[0]);
-          }
+          this.entry = entries[0];
 
-          this.$emit('change', entries[0]);
+          this.isIntersecting = this.entry.isIntersecting;
+
+          this.$emit('update', this.entry);
         },
         {
           threshold: this.threshold,
