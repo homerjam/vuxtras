@@ -6,7 +6,7 @@
  *
  * Usage:
  *
- * <intersect :threshold="[0]" root-margin="100px 0px 100px 0px" @enter="showImage()">
+ * <intersect :threshold="[0.5, 0]" root-margin="100px 0px 100px 0px" @change="showImage($event.isIntersecting)">
  *
  *  <img src="image.jpg">
  *
@@ -20,7 +20,7 @@ if (typeof window !== 'undefined') {
   require('intersection-observer');
 }
 
-const warn = msg => {
+const warn = (msg) => {
   if (!Vue.config.silent) {
     console.warn(msg);
   }
@@ -30,57 +30,71 @@ export default {
   name: 'Intersect',
   abstract: true,
   props: {
-    threshold: {
-      type: Array,
-      required: false,
-      default: () => [0, 0],
-    },
     root: {
       type: typeof HTMLElement !== 'undefined' ? HTMLElement : Object,
-      required: false,
       default: () => null,
+    },
+    threshold: {
+      type: Array,
+      default: () => [0],
     },
     rootMargin: {
       type: String,
-      required: false,
-      default: () => '0px 0px 0px 0px',
+      default: '0px',
+    },
+  },
+  watch: {
+    threshold() {
+      this.init();
+    },
+    rootMargin() {
+      this.init();
     },
   },
   mounted() {
-    this.observer = new IntersectionObserver(
-      entries => {
-        if (!entries[0].isIntersecting) {
-          this.$emit('leave', entries[0]);
-        } else {
-          this.$emit('enter', entries[0]);
-        }
-
-        this.$emit('change', entries[0]);
-      },
-      {
-        threshold: this.threshold,
-        root: this.root,
-        rootMargin: this.rootMargin,
-      }
-    );
-
-    this.$nextTick(() => {
-      if (this.$slots.default && this.$slots.default.length > 1) {
-        warn(
-          '[vuxtras/intersect] You may only wrap one element in a <intersect> component.'
-        );
-      } else if (!this.$slots.default || this.$slots.default.length < 1) {
-        warn(
-          '[vuxtras/intersect] You must have one child inside a <intersect> component.'
-        );
-        return;
-      }
-
-      this.observer.observe(this.$slots.default[0].elm);
-    });
+    this.init();
   },
   destroyed() {
     this.observer.disconnect();
+  },
+  methods: {
+    init() {
+      if (this.observer) {
+        this.observer.disconnect();
+      }
+
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          if (!entries[0].isIntersecting) {
+            this.$emit('leave', entries[0]);
+          } else {
+            this.$emit('enter', entries[0]);
+          }
+
+          this.$emit('change', entries[0]);
+        },
+        {
+          threshold: this.threshold,
+          root: this.root,
+          rootMargin: this.rootMargin,
+        }
+      );
+
+      this.$nextTick(() => {
+        if (this.$slots.default && this.$slots.default.length > 1) {
+          warn(
+            '[vuxtras/intersect] You may only wrap one element in a <intersect> component.'
+          );
+        } else if (!this.$slots.default || this.$slots.default.length < 1) {
+          warn(
+            '[vuxtras/intersect] You must have one child inside a <intersect> component.'
+          );
+          return;
+        }
+
+        this.observer.observe(this.$slots.default[0].elm);
+      });
+    },
   },
   render() {
     return this.$slots.default ? this.$slots.default[0] : null;
