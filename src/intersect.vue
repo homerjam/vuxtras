@@ -26,6 +26,15 @@ const warn = (msg) => {
   }
 };
 
+const isEqualArrays = (a, b) => {
+  if (a === b) return true;
+  if (a.length !== b.length) return false;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+};
+
 export default {
   name: 'Intersect',
   abstract: true,
@@ -43,28 +52,14 @@ export default {
       default: '0px',
     },
   },
-  data() {
-    return {
-      isIntersecting: null,
-    };
-  },
   watch: {
-    threshold() {
-      this.init();
+    threshold(newValue, oldValue) {
+      if (!isEqualArrays(newValue, oldValue)) {
+        this.init();
+      }
     },
     rootMargin() {
       this.init();
-    },
-    isIntersecting() {
-      if (!this.entry) return;
-
-      if (this.isIntersecting) {
-        this.$emit('enter', this.entry);
-      } else {
-        this.$emit('leave', this.entry);
-      }
-
-      this.$emit('change', this.entry);
     },
   },
   mounted() {
@@ -78,12 +73,23 @@ export default {
       this.reset();
 
       this.entry = null;
+      this.isIntersecting = null;
 
       this.observer = new IntersectionObserver(
         (entries) => {
           this.entry = entries[0];
 
-          this.isIntersecting = this.entry.isIntersecting;
+          if (this.entry.isIntersecting !== this.isIntersecting) {
+            this.isIntersecting = this.entry.isIntersecting;
+
+            if (this.isIntersecting) {
+              this.$emit('enter', this.entry);
+            } else {
+              this.$emit('leave', this.entry);
+            }
+
+            this.$emit('change', this.entry);
+          }
 
           this.$emit('update', this.entry);
         },
@@ -113,8 +119,6 @@ export default {
       if (this.observer) {
         this.observer.disconnect();
       }
-
-      this.isIntersecting = null;
     },
   },
   render() {
