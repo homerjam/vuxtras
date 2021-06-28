@@ -1,3 +1,18 @@
+<template>
+  <div class="morph" :class="{ ready }">
+    <span class="morph-sources">
+      <slot />
+    </span>
+    <svg
+      :viewBox="targetViewBox"
+      :preserveAspectRatio="targetPreserveAspectRatio"
+      class="morph-target"
+    >
+      <path class="morph-target-path" />
+    </svg>
+  </div>
+</template>
+
 <script>
 /**
  * vuxtras/morph
@@ -132,21 +147,6 @@ export default {
   },
 };
 </script>
-
-<template>
-  <div class="morph" :class="{ ready }">
-    <span class="morph-sources">
-      <slot />
-    </span>
-    <svg
-      :viewBox="targetViewBox"
-      :preserveAspectRatio="targetPreserveAspectRatio"
-      class="morph-target"
-    >
-      <path class="morph-target-path" />
-    </svg>
-  </div>
-</template>
 
 <style>
 .morph {

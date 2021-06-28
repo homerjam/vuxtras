@@ -1,3 +1,17 @@
+<template>
+  <router-link v-if="!isUri && to" :to="to">
+    <slot />
+  </router-link>
+  <component
+    :is="to ? 'a' : 'span'"
+    v-else
+    :href="isUri ? to : undefined"
+    :target="isUri && isExternal ? '_blank' : undefined"
+  >
+    <slot />
+  </component>
+</template>
+
 <script>
 /**
  * vuxtras/smart-link
@@ -39,17 +53,3 @@ export default {
   },
 };
 </script>
-
-<template>
-  <router-link v-if="!isUri && to" :to="to">
-    <slot />
-  </router-link>
-  <component
-    :is="to ? 'a' : 'span'"
-    v-else
-    :href="isUri ? to : undefined"
-    :target="isUri && isExternal ? '_blank' : undefined"
-  >
-    <slot />
-  </component>
-</template>

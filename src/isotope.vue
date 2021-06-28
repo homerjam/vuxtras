@@ -1,3 +1,9 @@
+<template>
+  <div>
+    <slot />
+  </div>
+</template>
+
 <script>
 /**
  * vuxtras/isotope
@@ -99,9 +105,3 @@ export default {
 </script>
 
 <style></style>
-
-<template>
-  <div>
-    <slot />
-  </div>
-</template>

@@ -1,3 +1,38 @@
+<template>
+  <div :class="getClass" :style="getStyle">
+    <svg v-if="dropShadowOptions.enabled" width="100%" height="100%">
+      <defs>
+        <filter id="rbi-shadow">
+          <feDropShadow
+            :dx="dropShadowOptions.offsetX"
+            :dy="dropShadowOptions.offsetY"
+            :stdDeviation="dropShadowOptions.size"
+            :flood-color="dropShadowOptions.color"
+            :flood-opacity="dropShadowOptions.opacity"
+          />
+        </filter>
+      </defs>
+      <image
+        :xlink:href="src"
+        :x="`${dropShadowOptions.padding[3] * 100}%`"
+        :y="`${dropShadowOptions.padding[0] * 100}%`"
+        :width="`${
+          100 -
+          dropShadowOptions.padding[3] * 100 -
+          dropShadowOptions.padding[1] * 100
+        }%`"
+        :height="`${
+          100 -
+          dropShadowOptions.padding[0] * 100 -
+          dropShadowOptions.padding[2] * 100
+        }%`"
+        style="filter: url(#rbi-shadow)"
+      />
+    </svg>
+    <slot />
+  </div>
+</template>
+
 <script>
 /**
  * vuxtras/responsive-background-image
@@ -109,30 +144,3 @@ export default {
   },
 };
 </script>
-
-<template>
-  <div :class="getClass" :style="getStyle">
-    <svg v-if="dropShadowOptions.enabled" width="100%" height="100%">
-      <defs>
-        <filter id="rbi-shadow">
-          <feDropShadow
-            :dx="dropShadowOptions.offsetX"
-            :dy="dropShadowOptions.offsetY"
-            :stdDeviation="dropShadowOptions.size"
-            :flood-color="dropShadowOptions.color"
-            :flood-opacity="dropShadowOptions.opacity"
-          />
-        </filter>
-      </defs>
-      <image
-        :xlink:href="src"
-        :x="(dropShadowOptions.padding[3] * 100) + '%'"
-        :y="(dropShadowOptions.padding[0] * 100) + '%'"
-        :width="100 - (dropShadowOptions.padding[3] * 100) - (dropShadowOptions.padding[1] * 100) + '%'"
-        :height="100 - (dropShadowOptions.padding[0] * 100) - (dropShadowOptions.padding[2] * 100) + '%'"
-        style="filter:url(#rbi-shadow);"
-      />
-    </svg>
-    <slot />
-  </div>
-</template>

@@ -1,3 +1,9 @@
+<template>
+  <div>
+    <slot />
+  </div>
+</template>
+
 <script>
 /**
  * vuxtras/flickity
@@ -255,8 +261,3 @@ https://flickity.metafizzy.co
 }
 </style>
 
-<template>
-  <div>
-    <slot />
-  </div>
-</template>
