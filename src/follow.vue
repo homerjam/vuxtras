@@ -1,17 +1,3 @@
-<template>
-  <div
-    :style="{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      pointerEvents: 'none',
-      opacity: isVisible ? 1 : 0,
-    }"
-  >
-    <slot />
-  </div>
-</template>
-
 <script>
 /**
  * vuxtras/follow
@@ -47,6 +33,12 @@ export default {
     };
   },
   mounted() {
+    this.$el.style.position = 'absolute';
+    this.$el.style.top = '0';
+    this.$el.style.left = '0';
+    this.$el.style.pointerEvents = 'none';
+    this.$el.style.opacity = this.isVisible ? 1 : 0;
+
     document.addEventListener('mousemove', this.mousemove);
 
     if (this.$el.parentNode) {
@@ -88,14 +80,19 @@ export default {
     },
     show() {
       this.isVisible = true;
+      this.$el.style.opacity = this.isVisible ? 1 : 0;
 
       this.raf = window.requestAnimationFrame(this.animate);
     },
     hide() {
       this.isVisible = false;
+      this.$el.style.opacity = this.isVisible ? 1 : 0;
 
       window.cancelAnimationFrame(this.raf);
     },
+  },
+  render() {
+    return this.$slots.default ? this.$slots.default[0] : null;
   },
 };
 </script>
