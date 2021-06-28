@@ -1,11 +1,11 @@
 <template>
   <div
-    v-show="isVisible"
     :style="{
       position: 'absolute',
       top: 0,
       left: 0,
       pointerEvents: 'none',
+      opacity: isVisible ? 1 : 0,
     }"
   >
     <slot />
