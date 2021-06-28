@@ -21,7 +21,7 @@
  * Usage:
  *
  *
- * <follow :isVisible="true">
+ * <follow :visible="true">
  *
  *  <!-- content here -->
  *
